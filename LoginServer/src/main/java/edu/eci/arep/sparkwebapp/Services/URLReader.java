@@ -44,10 +44,6 @@ public class URLReader {
             sslContext.init(null, tmf.getTrustManagers(), null);
             SSLContext.setDefault(sslContext);
 
-            // We can now read this URL
-            readURL("https://localhost:5000/hello");
-
-
         } catch (KeyStoreException | IOException | NoSuchAlgorithmException | CertificateException | KeyManagementException ex) {
             Logger.getLogger(URLReader.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,16 +60,16 @@ public class URLReader {
             // Obtiene los campos del encabezado y los almacena en un estructura Map
             urlConnection.setRequestMethod("GET");
             urlConnection.setDoOutput(true);
-            System.out.println("-------message-body------");
+            System.out.println("-------message-from server 2------");
             try (BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "utf-8"))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
             while ((responseLine = br.readLine()) != null) {
                 response.append(responseLine.trim());
             }
+            System.out.println(response.toString());
             return response.toString();
         }
-
 
     }
 }

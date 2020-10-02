@@ -69,6 +69,11 @@ public class App
             return "HOLAAA";
         }));
 
+        get("/logout",((request, response) -> {
+            request.session().attribute("isLogged",false);
+            return "";
+        }));
+
         post("/login", (request, response) -> {
             request.body();
             request.session(true);

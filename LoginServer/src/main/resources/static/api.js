@@ -7,7 +7,7 @@ var api = (function () {
         let user = {username : uname, password:passwd};
         axios.post(url+"/login",user).then(res=>{
             if(res.data!==""){
-                alert("Complete all fields");
+                alert("Invalid username or password");
             }
             else {
                 window.location.href="protected/test.html";
@@ -15,7 +15,15 @@ var api = (function () {
         })
     }
 
+    function logout(){
+        axios.get(url+"/logout").then(res=>{
+            alert("You have closed your session");
+            window.location.href = "/login.html" ;
+        })
+    }
+
     return {
-        login:login
+        login:login,
+        logout:logout
     };
 })();
