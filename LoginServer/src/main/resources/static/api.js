@@ -1,21 +1,22 @@
 var api = (function () {
-    var url="https://localhost:5000";
+    var url="https://localhost:5001";
 
     function login(){
-        var user={email:document.getElementById("email").value,password:document.getElementById("password").value};
+        let uname = document.getElementById("username").value;
+        let passwd = document.getElementById("passwd").value;
+        let user = {username : uname, password:passwd};
         axios.post(url+"/login",user).then(res=>{
             if(res.data!=""){
-                alert(res.data)
+                alert("Complete all fields");
             }
             else {
-                window.location.href="secured/index.html";
+                window.location.href="protected/test.html";
             }
-
         })
     }
 
     return {
         login:login,
-        serviceData:serviceData
+        //serviceData:serviceData
     };
 })();

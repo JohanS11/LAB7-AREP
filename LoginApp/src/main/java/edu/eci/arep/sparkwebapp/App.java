@@ -14,7 +14,7 @@ public class App
     public static void main( String[] args )
     {
         port(getPort());
-        secure("keystores/ecikeystore.p12", "arep123", null, null);
+        secure("keystores/ecikeystore.p12", "arep123", "keystores/myTrustStore","arep123");
         get("/hello", App::inputDataPage);
     }
 
@@ -27,7 +27,8 @@ public class App
      *          the resource located at /inputdata
      */
     private static String inputDataPage(Request req, Response res) {
-        return "Hello My Friend";
+        return "<h1> Hello My Friend, This is" +
+                "the response from the other server <h1>";
     }
 
     static int getPort() {

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static edu.eci.arep.sparkwebapp.Services.cipherServices.convertPass;
+import static edu.eci.arep.sparkwebapp.Services.cipherServices.*;
 import static spark.Spark.*;
 
 /**
@@ -37,12 +37,10 @@ public class App
             }
             boolean isLogged = req.session().attribute("isLogged");
             if (!isLogged) {
-                halt(401, "<h1>NOT </h1>");
+                halt(401, "<h1> NOT AUTHORIZED </h1>");
             }
         });
 
-        StaticFilesConfiguration staticHandler = new StaticFilesConfiguration();
-        staticHandler.configure("/static");
 
         before("/login.html", ((req, response) -> {
             req.session(true);
@@ -56,12 +54,22 @@ public class App
         }));
 
 
+        StaticFilesConfiguration staticHandler = new StaticFilesConfiguration();
+        staticHandler.configure("/static");
+
+        before((request, response) ->
+                staticHandler.consume(request.raw(), response.raw()));
+
         get("/",((request, response) -> {
-            response.redirect("/login.html");
+            response.redirect("login.html");
             return "";
         }));
 
-        post("/login",((request, response) -> {
+        get("/areyouhere",((request, response) -> {
+            return "HOLAAA";
+        }));
+
+        post("/login", (request, response) -> {
             request.body();
             request.session(true);
             User user = gson.fromJson(request.body(), User.class);
@@ -71,12 +79,11 @@ public class App
                 return "Invalid Username or password ";
             }
             return "";
-        }));
+        });
 
-        get("/protected/service",(request, response) -> URLReader.readURL("https://localhost:5000"));
+        get("/protected/service",(request, response) -> URLReader.readURL("https://localhost:5000/hello"));
 
     }
-
 
     /**
      * @param req This is the object that represents the HTTP request
@@ -96,7 +103,7 @@ public class App
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
         }
-        return 5000; //returns default port if heroku-port isn't set (i.e. on localhost)
+        return 5001; //returns default port if heroku-port isn't set (i.e. on localhost)
     }
 
 }
