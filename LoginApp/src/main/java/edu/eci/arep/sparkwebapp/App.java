@@ -27,7 +27,7 @@ public class App
      *          the resource located at /inputdata
      */
     private static String inputDataPage(Request req, Response res) {
-        return "Hello Heroku";
+        return "Hello My Friend";
     }
 
     static int getPort() {
