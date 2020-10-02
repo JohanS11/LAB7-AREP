@@ -37,7 +37,7 @@ public class App
             }
             boolean isLogged = req.session().attribute("isLogged");
             if (!isLogged) {
-                halt(401, "<h1> NOT AUTHORIZED </h1>");
+                halt(401, "<h1> 401 NOT AUTHORIZED </h1>");
             }
         });
 
@@ -81,7 +81,7 @@ public class App
             return "";
         });
 
-        get("/protected/service",(request, response) -> URLReader.readURL("https://localhost:5000/hello"));
+        get("/protected/service",(request, response) -> URLReader.readURL("https://ec2-54-242-161-34.compute-1.amazonaws.com:9002/hello"));
 
     }
 
