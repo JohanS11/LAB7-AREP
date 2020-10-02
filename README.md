@@ -10,6 +10,12 @@
   This is the intended for this project
   
   ![uml](img/arch.png)
+  
+## CI/CD
+  
+  Login Server **CircleCi** [![CircleCI](https://circleci.com/gh/JohanS11/Lab3Arep.svg?style=svg)](https://circleci.com/gh/JohanS11/ServerLoginArep)
+  
+  Login App **CircleCi** [![CircleCI](https://circleci.com/gh/JohanS11/Lab3Arep.svg?style=svg)](https://circleci.com/gh/JohanS11/LoginAppServer)
  
 ## User's guide
 
